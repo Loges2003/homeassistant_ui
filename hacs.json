@@ -1,7 +1,7 @@
 {
   "name": "Custom Smart UI",
   "content_in_root": false,
-  "filename": "custom-ui",
+  "filename": "custom_ui",
   "domains": ["lovelace"],
   "country": "IN",
   "render_readme": true
