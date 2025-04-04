@@ -1,69 +1,35 @@
-$(document).ready(function () {
-    function updateSwitchUI(switchId, newState) {
-        let switchElement = $("#" + switchId);
-        let currentState = switchElement.is(":checked") ? "on" : "off";
+const HA_URL = "http://192.168.0.:8123";
+const HA_TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjM2Q3N2RmYTkwNmI0NTBlYmNlYWQzZGUyNDU5ZTE3MCIsImlhdCI6MTc0MzIzMDgzMSwiZXhwIjoyMDU4NTkwODMxfQ.j0k1D6PwVs_gl87xgOhUKZZHEio7DQ0mKxVEo5Y-NGg";
 
-        // Update only if there's a state change
-        if (currentState !== newState) {
-            switchElement.prop("checked", newState === "on");
-            $("#switchStatus" + switchId.replace("switch", "")).text(newState === "on" ? "ON" : "OFF");
-        }
-    }
+async function toggleEntity(entity) {
+    await fetch(`${HA_URL}/api/services/homeassistant/toggle`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${HA_TOKEN}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ entity_id: entity })
+    });
+}
 
-    function fetchSwitchState(switchId, entityId) {
-        $.get("/get_switch_state?entity=" + entityId, function (data) {
-            updateSwitchUI(switchId, data.state);
-        });
-    }
+async function setBrightness(value) {
+    await fetch(`${HA_URL}/api/services/light/turn_on`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${HA_TOKEN}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ entity_id: "light.led", brightness_pct: parseInt(value) })
+    });
+}
 
-    function updateDoorStatus() {
-        $.get("/get_door_status", function (data) {
-            let currentIcon = $("#doorIcon").attr("src");
-            let newIcon = "/static/" + (data.status === "open" ? "door_open.png" : "door_closed.png");
-
-            // Update only if there's a change
-            if (currentIcon !== newIcon) {
-                $("#doorIcon").attr("src", newIcon);
-            }
-        });
-    }
-
-    function updateRGBStatus() {
-        $.get("/get_rgb_status", function (data) {
-            let newValue = data.brightness;
-            let slider = $("#rgbSlider");
-            let statusText = $("#rgbStatus");
-
-            // Update only if value changes
-            if (slider.val() != newValue) {
-                slider.val(newValue);
-                statusText.text(newValue + "%");
-            }
-        });
-    }
-
-    function updateCurtainStatus() {
-        $.get("/get_curtain_status", function (data) {
-            let newValue = data.position;
-            let slider = $("#curtainSlider");
-            let statusText = $("#curtainStatus");
-
-            // Update only if value changes
-            if (slider.val() != newValue) {
-                slider.val(newValue);
-                statusText.text(newValue + "%");
-            }
-        });
-    }
-
-    // Periodic Updates (Reduced Refresh Rate to 3 seconds)
-    setInterval(function () {
-        updateDoorStatus();
-        updateRGBStatus();
-        updateCurtainStatus();
-
-        for (let i = 1; i <= 5; i++) {
-            fetchSwitchState("switch" + i, "switch.hogar_" + i);
-        }
-    }, 4000);
-});
+async function setCurtain(value) {
+    await fetch(`${HA_URL}/api/services/cover/set_cover_position`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${HA_TOKEN}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ entity_id: "cover.curtain", position: parseInt(value) })
+    });
+}

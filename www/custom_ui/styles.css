@@ -1,105 +1,26 @@
 body {
-    background: url('../static/background.jpg') no-repeat center center fixed;
+    background-image: url('background.jpg');
     background-size: cover;
+    color: white;
+    text-align: center;
     font-family: Arial, sans-serif;
-    color: #969286;
 }
 
-
-
-/* Smooth transition for UI updates */
-#doorIcon {
-    transition: opacity 0.3s ease-in-out;
-}
-
-input[type="range"] {
-    transition: all 0.3s ease-in-out;
-}
-
-.switch .slider:before {
-    transition: transform 0.3s ease-in-out;
-}
-
-/* Align everything to the right */
-#controlPanel {
-    position: absolute;
-    right: 5%;
-    top: 20px;
-    width: 500px; /* Increase the width */
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.5); /* Optional: Add a semi-transparent background */
-    border-radius: 10px; /* Smooth edges */
-}
-
-/* Center align text */
-#controlPanel h3 {
-    text-align: center;
-}
-
-/* Door Status */
-#motionSensor {
-    text-align: center;
-}
-
-#motionSensor img {
-    width: 50px;
-    height: 50px;
-}
-
-/* Smart Switches */
-.switchContainer {
+.toggle-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    margin: 10px 0;
+    gap: 10px;
 }
 
-.switch {
-    display: flex;
-    align-items: center;
-}
-
-.switch input {
-    display: none;
-}
-
-.switch .slider {
-    position: relative;
-    width: 50px;
-    height: 25px;
-    background-color: #ccc;
-    border-radius: 15px;
+.toggle {
+    padding: 10px;
+    font-size: 18px;
+    width: 200px;
     cursor: pointer;
-    transition: 0.4s;
-    margin-right: 10px;
-}
-
-.switch .slider:before {
-    content: "";
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    border-radius: 50%;
-    transition: 0.4s;
-}
-
-input:checked + .slider {
-    background-color: #4CAF50;
-}
-
-input:checked + .slider:before {
-    transform: translateX(24px);
-}
-
-/* Sliders */
-#rgbLight, #curtainMotor {
-    width: 100%;
-    margin-top: 10px;
 }
 
 input[type="range"] {
-    width: 100%;
+    width: 80%;
+    margin: 20px;
 }

@@ -3,45 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Home Control</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Smart Home Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <div id="controlPanel">
-        <!-- Door Status -->
-        <div id="motionSensor">
-            <h3>Door Status</h3>
-            <img id="doorIcon" src="{{ url_for('static', filename='door_closed.png') }}" alt="Door Status">
-        </div>
+    <h1>Home Automation Dashboard</h1>
 
-        <!-- Smart Switches for Rooms -->
-        {% for i in range(1, 6) %}
-        <div class="switchContainer">
-            <h3>Room {{ i }} Switch</h3>
-            <label class="switch">
-                <input type="checkbox" id="switch{{ i }}" onchange="toggleSwitch('switch{{ i }}')">
-                <span class="slider"></span>
-            </label>
-            <span id="switchStatus{{ i }}">Loading...</span>
-        </div>
-        {% endfor %}
-
-        <!-- RGB Light Brightness Slider -->
-        <div id="rgbLight">
-            <h3>RGB Light Brightness</h3>
-            <input type="range" id="rgbSlider" min="0" max="100" step="1" onchange="setRGB()">
-            <span id="rgbStatus">Loading...</span>
-        </div>
-
-        <!-- Curtain Motor Slider -->
-        <div id="curtainMotor">
-            <h3>Curtain Motor</h3>
-            <input type="range" id="curtainSlider" min="0" max="100" step="1" onchange="setCurtain()">
-            <span id="curtainStatus">Loading...</span>
-        </div>
+    <!-- Light & Fan Toggle Buttons -->
+    <div class="toggle-container">
+        <button class="toggle" id="light1" onclick="toggleEntity('switch.light1')">Light 1</button>
+        <button class="toggle" id="light2" onclick="toggleEntity('switch.light2')">Light 2</button>
+        <button class="toggle" id="fan1" onclick="toggleEntity('switch.fan1')">Fan 1</button>
+        <button class="toggle" id="fan2" onclick="toggleEntity('switch.fan2')">Fan 2</button>
+        <button class="toggle" id="fan3" onclick="toggleEntity('switch.fan3')">Fan 3</button>
     </div>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <!-- LED Dimmer -->
+    <label for="ledDimmer">LED Brightness:</label>
+    <input type="range" id="ledDimmer" min="0" max="100" step="1" onchange="setBrightness(this.value)">
+
+    <!-- Curtain Operation Slider -->
+    <label for="curtainSlider">Curtain Position:</label>
+    <input type="range" id="curtainSlider" min="0" max="100" step="1" onchange="setCurtain(this.value)">
 </body>
 </html>
