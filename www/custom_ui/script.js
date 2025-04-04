@@ -1,6 +1,7 @@
 const HA_URL = "http://192.168.0.:8123";
 const HA_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjM2Q3N2RmYTkwNmI0NTBlYmNlYWQzZGUyNDU5ZTE3MCIsImlhdCI6MTc0MzIzMDgzMSwiZXhwIjoyMDU4NTkwODMxfQ.j0k1D6PwVs_gl87xgOhUKZZHEio7DQ0mKxVEo5Y-NGg";
 
+//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
 async function toggleEntity(entity) {
     await fetch(`${HA_URL}/api/services/homeassistant/toggle`, {
         method: "POST",
