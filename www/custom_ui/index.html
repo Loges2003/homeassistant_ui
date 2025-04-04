@@ -1,30 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Home Dashboard</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+  <title>Smart Home UI</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Home Automation Dashboard</h1>
+  <h2>Home Control Panel</h2>
 
-    <!-- Light & Fan Toggle Buttons -->
-    <div class="toggle-container">
-        <button class="toggle" id="light1" onclick="toggleEntity('switch.light1')">Light 1</button>
-        <button class="toggle" id="light2" onclick="toggleEntity('switch.light2')">Light 2</button>
-        <button class="toggle" id="fan1" onclick="toggleEntity('switch.fan1')">Fan 1</button>
-        <button class="toggle" id="fan2" onclick="toggleEntity('switch.fan2')">Fan 2</button>
-        <button class="toggle" id="fan3" onclick="toggleEntity('switch.fan3')">Fan 3</button>
-    </div>
+  <div class="control-box">
+    <button onclick="toggleEntity('switch.light1')">Light 1</button>
+    <button onclick="toggleEntity('switch.light2')">Light 2</button>
+    <button onclick="toggleEntity('switch.fan1')">Fan 1</button>
+    <button onclick="toggleEntity('switch.fan2')">Fan 2</button>
+    <button onclick="toggleEntity('switch.fan3')">Fan 3</button>
 
-    <!-- LED Dimmer -->
-    <label for="ledDimmer">LED Brightness:</label>
-    <input type="range" id="ledDimmer" min="0" max="100" step="1" onchange="setBrightness(this.value)">
+    <label>LED Brightness</label>
+    <input type="range" min="0" max="100" onchange="setBrightness(this.value)">
 
-    <!-- Curtain Operation Slider -->
-    <label for="curtainSlider">Curtain Position:</label>
-    <input type="range" id="curtainSlider" min="0" max="100" step="1" onchange="setCurtain(this.value)">
+    <label>Curtain Position</label>
+    <input type="range" min="0" max="100" onchange="setCurtain(this.value)">
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>

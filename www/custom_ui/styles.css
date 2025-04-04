@@ -1,26 +1,14 @@
 body {
-    background-image: url('background.jpg');
-    background-size: cover;
-    color: white;
-    text-align: center;
-    font-family: Arial, sans-serif;
+  background-color: #1c1c1c;
+  color: white;
+  font-family: Arial, sans-serif;
+  padding: 20px;
 }
-
-.toggle-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+.control-box {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
-
-.toggle {
-    padding: 10px;
-    font-size: 18px;
-    width: 200px;
-    cursor: pointer;
-}
-
-input[type="range"] {
-    width: 80%;
-    margin: 20px;
+input[type=range] {
+  width: 300px;
 }
